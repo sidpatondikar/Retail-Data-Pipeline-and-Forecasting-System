@@ -1,0 +1,257 @@
+[
+  {
+    "transaction_id": 2245939,
+    "customer_id": 7,
+    "timestamp": "2024-02-03T15:57:51.055072",
+    "items": [
+      {
+        "product_id": 32,
+        "product_name": "Natural Dyes Hard Standard",
+        "qty": 1
+      },
+      {
+        "product_id": 10,
+        "product_name": "Nuts Clusters Discs",
+        "qty": null
+      },
+      {
+        "product_id": 8,
+        "product_name": "Nuts Filled Coins",
+        "qty": 3
+      },
+      {
+        "product_id": 27,
+        "product_name": "Vitamin Coating Lozenges Standard",
+        "qty": 1
+      },
+      {
+        "product_id": 21,
+        "product_name": "Powdered Sugar Sticks Balls",
+        "qty": 2
+      }
+    ]
+  },
+  {
+    "transaction_id": 74584837,
+    "customer_id": 2,
+    "timestamp": "2024-02-03T17:58:49.647682",
+    "items": [
+      {
+        "product_id": 27,
+        "product_name": "Vitamin Coating Lozenges Standard",
+        "qty": 1
+      },
+      {
+        "product_id": 33,
+        "product_name": "Vitamin Coating Gummy Medicated Drops",
+        "qty": null
+      },
+      {
+        "product_id": 3,
+        "product_name": "Sprinkles Truffles Coins",
+        "qty": 4
+      },
+      {
+        "product_id": 20,
+        "product_name": "Sugar-Free Coat Bubble Rectangles",
+        "qty": 1
+      },
+      {
+        "product_id": 25,
+        "product_name": "Vitamin Coating Lozenges Medicated Drops",
+        "qty": 3
+      }
+    ]
+  },
+  {
+    "transaction_id": 51402843,
+    "customer_id": 28,
+    "timestamp": "2024-02-03T06:17:25.543932",
+    "items": [
+      {
+        "product_id": 4,
+        "product_name": "Nuts Truffles Coins",
+        "qty": 1
+      },
+      {
+        "product_id": 20,
+        "product_name": "Sugar-Free Coat Bubble Rectangles",
+        "qty": 2
+      },
+      {
+        "product_id": 18,
+        "product_name": "Sugar-Free Coat Bubble Balls",
+        "qty": 2
+      },
+      {
+        "product_id": 11,
+        "product_name": "Sprinkles Clusters Coins",
+        "qty": 5
+      },
+      {
+        "product_id": 25,
+        "product_name": "Vitamin Coating Lozenges Medicated Drops",
+        "qty": 4
+      }
+    ]
+  },
+  {
+    "transaction_id": 28926696,
+    "customer_id": 9,
+    "timestamp": "2024-02-03T02:15:27.078663",
+    "items": [
+      {
+        "product_id": 9,
+        "product_name": "Sprinkles Clusters Discs",
+        "qty": 5
+      },
+      {
+        "product_id": 13,
+        "product_name": "Powdered Sugar Pellets Balls",
+        "qty": 3
+      }
+    ]
+  },
+  {
+    "transaction_id": 73009152,
+    "customer_id": 6,
+    "timestamp": "2024-02-03T20:39:28.692842",
+    "items": [
+      {
+        "product_id": 20,
+        "product_name": "Sugar-Free Coat Bubble Rectangles",
+        "qty": 4
+      },
+      {
+        "product_id": 11,
+        "product_name": "Sprinkles Clusters Coins",
+        "qty": 4
+      }
+    ]
+  },
+  {
+    "transaction_id": 74748026,
+    "customer_id": 6,
+    "timestamp": "2024-02-03T21:27:38.918082",
+    "items": [
+      {
+        "product_id": 30,
+        "product_name": "Natural Dyes Hard Medicated Drops",
+        "qty": 5
+      },
+      {
+        "product_id": 31,
+        "product_name": "Vitamin Coating Hard Standard",
+        "qty": 3
+      },
+      {
+        "product_id": 3,
+        "product_name": "Sprinkles Truffles Coins",
+        "qty": 5
+      },
+      {
+        "product_id": 18,
+        "product_name": "Sugar-Free Coat Bubble Balls",
+        "qty": 5
+      }
+    ]
+  },
+  {
+    "transaction_id": 77275594,
+    "customer_id": 11,
+    "timestamp": "2024-02-03T14:51:44.668548",
+    "items": [
+      {
+        "product_id": 26,
+        "product_name": "Natural Dyes Lozenges Medicated Drops",
+        "qty": 4
+      },
+      {
+        "product_id": 22,
+        "product_name": "Sugar-Free Coat Sticks Balls",
+        "qty": 1
+      },
+      {
+        "product_id": 23,
+        "product_name": "Powdered Sugar Sticks Rectangles",
+        "qty": null
+      }
+    ]
+  },
+  {
+    "transaction_id": 48037639,
+    "customer_id": 15,
+    "timestamp": "2024-02-03T19:56:04.049237",
+    "items": [
+      {
+        "product_id": 28,
+        "product_name": "Natural Dyes Lozenges Standard",
+        "qty": 5
+      },
+      {
+        "product_id": 16,
+        "product_name": "Sugar-Free Coat Pellets Rectangles",
+        "qty": 2
+      },
+      {
+        "product_id": 2,
+        "product_name": "Nuts Truffles Discs",
+        "qty": null
+      },
+      {
+        "product_id": 10,
+        "product_name": "Nuts Clusters Discs",
+        "qty": 4
+      },
+      {
+        "product_id": 9,
+        "product_name": "Sprinkles Clusters Discs",
+        "qty": 5
+      }
+    ]
+  },
+  {
+    "transaction_id": 17874475,
+    "customer_id": 2,
+    "timestamp": "2024-02-03T03:40:17.377240",
+    "items": [
+      {
+        "product_id": 32,
+        "product_name": "Natural Dyes Hard Standard",
+        "qty": 5
+      },
+      {
+        "product_id": 8,
+        "product_name": "Nuts Filled Coins",
+        "qty": 2
+      },
+      {
+        "product_id": 13,
+        "product_name": "Powdered Sugar Pellets Balls",
+        "qty": 1
+      }
+    ]
+  },
+  {
+    "transaction_id": 33541170,
+    "customer_id": 28,
+    "timestamp": "2024-02-03T22:52:32.497112",
+    "items": [
+      {
+        "product_id": 34,
+        "product_name": "Natural Dyes Gummy Medicated Drops",
+        "qty": 1
+      },
+      {
+        "product_id": 28,
+        "product_name": "Natural Dyes Lozenges Standard",
+        "qty": 4
+      },
+      {
+        "product_id": 12,
+        "product_name": "Nuts Clusters Coins",
+        "qty": 1
+      }
+    ]
+  }
+]

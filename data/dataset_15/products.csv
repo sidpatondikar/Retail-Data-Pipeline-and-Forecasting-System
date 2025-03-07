@@ -1,0 +1,37 @@
+product_id,product_name,product_category,product_subcategory,product_shape,sales_price,cost_to_make,stock
+1,Sprinkles Truffles Discs,Chocolate,Truffles,Discs,0.69,0.43,4116
+2,Nuts Truffles Discs,Chocolate,Truffles,Discs,9.17,4.69,3630
+3,Sprinkles Truffles Coins,Chocolate,Truffles,Coins,9.78,5.83,4971
+4,Nuts Truffles Coins,Chocolate,Truffles,Coins,6.06,3.31,3041
+5,Sprinkles Filled Discs,Chocolate,Filled,Discs,8.23,4.81,4315
+6,Nuts Filled Discs,Chocolate,Filled,Discs,1.85,0.95,2632
+7,Sprinkles Filled Coins,Chocolate,Filled,Coins,8.22,5.59,4092
+8,Nuts Filled Coins,Chocolate,Filled,Coins,7.74,4.46,3495
+9,Sprinkles Clusters Discs,Chocolate,Clusters,Discs,5.97,3.31,2972
+10,Nuts Clusters Discs,Chocolate,Clusters,Discs,9.83,6.45,3619
+11,Sprinkles Clusters Coins,Chocolate,Clusters,Coins,6.86,3.6,2052
+12,Nuts Clusters Coins,Chocolate,Clusters,Coins,6.56,3.5,3590
+13,Powdered Sugar Pellets Balls,Chewing Gum,Pellets,Balls,3.39,2.37,3430
+14,Sugar-Free Coat Pellets Balls,Chewing Gum,Pellets,Balls,3.97,2.36,4894
+15,Powdered Sugar Pellets Rectangles,Chewing Gum,Pellets,Rectangles,3.01,1.63,2640
+16,Sugar-Free Coat Pellets Rectangles,Chewing Gum,Pellets,Rectangles,1.81,1.09,3789
+17,Powdered Sugar Bubble Balls,Chewing Gum,Bubble,Balls,3.14,1.41,3056
+18,Sugar-Free Coat Bubble Balls,Chewing Gum,Bubble,Balls,7.22,3.42,4311
+19,Powdered Sugar Bubble Rectangles,Chewing Gum,Bubble,Rectangles,7.1,4.38,2174
+20,Sugar-Free Coat Bubble Rectangles,Chewing Gum,Bubble,Rectangles,3.08,1.42,2638
+21,Powdered Sugar Sticks Balls,Chewing Gum,Sticks,Balls,8.53,4.05,2172
+22,Sugar-Free Coat Sticks Balls,Chewing Gum,Sticks,Balls,5.96,2.7,2439
+23,Powdered Sugar Sticks Rectangles,Chewing Gum,Sticks,Rectangles,2.01,1.24,3830
+24,Sugar-Free Coat Sticks Rectangles,Chewing Gum,Sticks,Rectangles,5.61,2.55,2327
+25,Vitamin Coating Lozenges Medicated Drops,Sugar-Free,Lozenges,Medicated Drops,8.14,3.59,2442
+26,Natural Dyes Lozenges Medicated Drops,Sugar-Free,Lozenges,Medicated Drops,8.17,3.4,2585
+27,Vitamin Coating Lozenges Standard,Sugar-Free,Lozenges,Standard,0.79,0.32,3821
+28,Natural Dyes Lozenges Standard,Sugar-Free,Lozenges,Standard,8.71,3.8,4353
+29,Vitamin Coating Hard Medicated Drops,Sugar-Free,Hard,Medicated Drops,8.56,5.34,4616
+30,Natural Dyes Hard Medicated Drops,Sugar-Free,Hard,Medicated Drops,6.24,3.16,3308
+31,Vitamin Coating Hard Standard,Sugar-Free,Hard,Standard,5.06,2.6,3614
+32,Natural Dyes Hard Standard,Sugar-Free,Hard,Standard,2.25,1.4,3511
+33,Vitamin Coating Gummy Medicated Drops,Sugar-Free,Gummy,Medicated Drops,7.55,3.48,4790
+34,Natural Dyes Gummy Medicated Drops,Sugar-Free,Gummy,Medicated Drops,5.88,4.05,3983
+35,Vitamin Coating Gummy Standard,Sugar-Free,Gummy,Standard,5.43,2.37,2305
+36,Natural Dyes Gummy Standard,Sugar-Free,Gummy,Standard,6.76,3.52,2335
