@@ -1,0 +1,227 @@
+image: python:3.12
+
+variables:
+  DATASET_NUMBER: "15"  # Change this number to match your dataset
+
+stages:
+  - format
+  - security
+  - files
+  - validation
+  - complexity
+
+format_check:
+  stage: format
+  before_script:
+    - pip install black
+  script:
+    - echo "Checking code formatting with black..."
+    - black --check . || (echo "❌ Code formatting check failed. Please run 'black .' to format your code." && exit 1)
+    - echo "✅ Code formatting check passed!"
+  only:
+    - merge_requests
+    - main
+
+security_check:
+  stage: security
+  script:
+    - echo "Checking for sensitive files..."
+    - |
+      if git diff --name-only origin/main $CI_COMMIT_SHA | grep -q ".env$"; then
+        echo "❌ Error: .env file detected in commit. Remove it and add to .gitignore"
+        exit 1
+      fi
+    - echo "✅ No sensitive files found in commit!"
+  only:
+    - merge_requests
+    - main
+
+protected_files:
+  stage: files
+  variables:
+    GIT_DEPTH: 0  # Get full git history
+  script:
+    - echo "Checking protected files..."
+    - |
+      PROTECTED_FILES=("config.yaml")
+      for file in "${PROTECTED_FILES[@]}"; do
+        if git diff --name-only origin/main $CI_COMMIT_SHA | grep -q "$file"; then
+          echo "❌ Error: $file has been modified. This file is protected and should not be changed."
+          exit 1
+        fi
+      done
+    - echo "✅ No protected files were modified!"
+    - echo "Checking forbidden imports..."
+    - |
+      python3 - << 'EOF'
+      import ast
+      
+      def check_no_pandas_import(file_path):
+          with open(file_path) as f:
+              tree = ast.parse(f.read())
+          
+          for node in ast.walk(tree):
+              if isinstance(node, ast.Import):
+                  for name in node.names:
+                      if name.name == 'pandas':
+                          print(f"❌ Error: pandas package should not be imported in {file_path}")
+                          exit(1)
+              elif isinstance(node, ast.ImportFrom):
+                  if node.module == 'pandas':
+                      print(f"❌ Error: pandas package should not be imported in {file_path}")
+                      exit(1)
+      
+      files_to_check = ['src/main.py', 'src/data_processor.py']
+      for file in files_to_check:
+          check_no_pandas_import(file)
+      print("✅ No forbidden imports found!")
+      EOF
+    - |
+      # Check if .gitlab-ci.yml remains unchanged
+      git fetch origin main
+      if ! diff <(git show origin/main:.gitlab-ci.yml) <(git show $CI_COMMIT_SHA:.gitlab-ci.yml) >/dev/null 2>&1; then
+        echo "❌ Error: .gitlab-ci.yml has been modified. This file should not be changed."
+        exit 1
+      fi
+    - echo "✅ All file checks passed!"
+  only:
+    - merge_requests
+    - main
+
+data_validation:
+  stage: validation
+  before_script:
+    - pip install pandas numpy
+  script:
+    - echo "Checking CSV files existence..."
+    - |
+      CSV_FILES=("daily_summary.csv" "order_line_items.csv" "orders.csv" "products_updated.csv" "sales_profit_forecast.csv")
+      for file in "${CSV_FILES[@]}"; do
+        if [ ! -f "data/output/$file" ]; then
+          echo "❌ Error: data/output/$file does not exist!"
+          exit 1
+        fi
+        if [ ! -f "data/answers_${DATASET_NUMBER}/$file" ]; then
+          echo "❌ Error: data/answers_${DATASET_NUMBER}/$file does not exist!"
+          exit 1
+        fi
+      done
+    - echo "✅ All CSV files exist!"
+    - |
+      python3 - << 'EOF'
+      import pandas as pd
+      import numpy as np
+      import os
+      
+      dataset_number = os.environ['DATASET_NUMBER']
+      
+      def compare_csvs(file_name):
+          print(f"\nChecking {file_name}...")
+          output_df = pd.read_csv(f'data/output/{file_name}')
+          answer_df = pd.read_csv(f'data/answers_{dataset_number}/{file_name}')
+          has_errors = False
+          
+          # Check if dataframes have same shape
+          if output_df.shape != answer_df.shape:
+              print(f"❌ Shape mismatch in {file_name}!")
+              print(f"Expected shape: {answer_df.shape}, Got: {output_df.shape}")
+              has_errors = True
+              
+          # Check column names
+          if not all(output_df.columns == answer_df.columns):
+              print(f"❌ Column names don't match in {file_name}!")
+              print("Missing columns:", set(answer_df.columns) - set(output_df.columns))
+              print("Extra columns:", set(output_df.columns) - set(answer_df.columns))
+              has_errors = True
+          
+          # Compare values with appropriate handling for each file type
+          for col in answer_df.columns:
+              if col in ['total_amount', 'line_total', 'total_sales', 'total_profit']:  # Money columns
+                  if not np.allclose(output_df[col], answer_df[col], rtol=1e-2, atol=0.01):
+                      diff_mask = ~np.isclose(output_df[col], answer_df[col], rtol=1e-2, atol=0.01)
+                      diff_indices = output_df.index[diff_mask]
+                      print(f"❌ Differences found in column '{col}':")
+                      for idx in diff_indices[:5]:  # Show first 5 differences
+                          print(f"Row {idx}:")
+                          print(f"Expected: {answer_df.loc[idx, col]:.2f}")
+                          print(f"Got: {output_df.loc[idx, col]:.2f}")
+                      has_errors = True
+              elif col in ['order_datetime']:  # Datetime columns
+                  output_dates = pd.to_datetime(output_df[col])
+                  answer_dates = pd.to_datetime(answer_df[col])
+                  if not (output_dates == answer_dates).all():
+                      diff_mask = output_dates != answer_dates
+                      diff_indices = output_df.index[diff_mask]
+                      print(f"❌ Differences found in column '{col}':")
+                      for idx in diff_indices[:5]:
+                          print(f"Row {idx}:")
+                          print(f"Expected: {answer_dates.loc[idx]}")
+                          print(f"Got: {output_dates.loc[idx]}")
+                      has_errors = True
+              else:  # Other columns (ids, quantities, etc.)
+                  if not (output_df[col] == answer_df[col]).all():
+                      diff_mask = output_df[col] != answer_df[col]
+                      diff_indices = output_df.index[diff_mask]
+                      print(f"❌ Differences found in column '{col}':")
+                      for idx in diff_indices:  # Show all differences
+                          print(f"Row {idx}:")
+                          print(f"Expected: {answer_df.loc[idx, col]}")
+                          print(f"Got: {output_df.loc[idx, col]}")
+                      has_errors = True
+          
+          if has_errors:
+              print(f"❌ {file_name} validation failed!")
+              return False
+          print(f"✅ {file_name} validation passed!")
+          return True
+      
+      files = ['daily_summary.csv', 'order_line_items.csv', 
+               'orders.csv', 'products_updated.csv']
+      
+      all_passed = True
+      for file in files:
+          if not compare_csvs(file):
+              all_passed = False
+      
+      print("\nFinal Results:")
+      if all_passed:
+          print("✅ All files passed validation!")
+      else:
+          print("❌ Some files had validation errors. Check the logs above for details.")
+      
+      exit(0 if all_passed else 1)
+      EOF
+  allow_failure: true
+  only:
+    - merge_requests
+    - main
+
+function_length_check:
+  stage: complexity
+  before_script:
+    - pip install flake8 mccabe
+  script:
+    - echo "Checking function length and complexity..."
+    - |
+      flake8 . --max-complexity=10 --max-function-length=100 \
+        --select=C901,CFQ \
+        --per-file-ignores="__init__.py:F401" \
+        --format="%(path)s:%(row)d: [%(code)s] %(text)s" > flake8_output.txt || true
+      
+      if [ -s flake8_output.txt ]; then
+        echo "❌ Found the following issues:"
+        echo "------------------------------"
+        echo "Complexity issues (C901):"
+        grep "C901" flake8_output.txt || echo "None"
+        echo
+        echo "Function length issues (CFQ):"
+        grep "CFQ" flake8_output.txt || echo "None"
+        echo "------------------------------"
+        echo "Please refactor the functions above to reduce their complexity and/or length."
+        exit 1
+      else
+        echo "✅ All functions are within acceptable length and complexity!"
+      fi
+  only:
+    - merge_requests
+    - main
