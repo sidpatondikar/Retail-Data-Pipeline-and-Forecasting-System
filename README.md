@@ -1,6 +1,11 @@
 
 # Retail Data Pipeline and Forecasting System
 
+## Apache Airflow Sequence
+
+![image](https://github.com/user-attachments/assets/c883bf57-601e-42fb-87c0-eddb1c8ea119)
+
+
 ## Project Overview
 
 CandyBatchProcessor is a batch data processing system designed to handle daily online transactions for Tiger's Candy, a rapidly growing candy store that originated on the RIT campus. This system processes raw orders, validates data, updates inventory, generates analytical reports, and integrates with a time series forecasting model to predict future sales and profits.
