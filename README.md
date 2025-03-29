@@ -1,5 +1,5 @@
 
-# CandyBatchProcessor
+# Retail Data Pipeline and Forecasting System
 
 ## Project Overview
 
